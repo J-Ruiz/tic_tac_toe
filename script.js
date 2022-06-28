@@ -1,46 +1,25 @@
 
-let gameboard = ["X","","X","O","","O","X","","X"];
+let gameboard = ["","","","","","","","",""];
 
-let createGameboard = () => {
-    //create gameboard boxes from array
-    for(let i = 0; i<gameboard.length; i++){
-        let newBox = document.createElement("div");
-        newBox.setAttribute("class", "gamebox")
-        newBox.innerHTML = gameboard[i];
-        newBox.addEventListener("click", ()=>{
-            //execute addIconToGameBoard() Function
-            //remove eventListener
-        })
-        document.getElementById("gameboard").appendChild(newBox);
+let whoseTurnIsIt = "1";
+
+let player1Score = 0;
+
+let player2Score = 0;
+
+
+let updateScore = (winningPlayer) => {
+        // if winning player is player1
+    if(winningPlayer == "1"){
+        player1Score++;
+        document.getElementById("P1-score").innerHTML = player1Score;
     }
-};
-
-
-let playerTurnSwitcher = () => {
-    //if it was player 1's turn
-        // make inner HTML = Player 2's turn
-    //else 
-        // make inner HTML = Player 1's turn
-};
-
-let addIconToGameboard = () => {
-    // if player 1's turn and clicks gameboard box
-        // find player 1's icon
-        // set array gameboard[index]  = player 1's icon
-        // execute the playerTurnSwitcher function
-
-    // else 
-        // find player 2's icon
-        // set array gameboard[index]  = player 2's icon
-        // execute the playerTurnSwitcher function
-
-};
-
-let updateScore = () => {
-    // if player 1 got 3 in a row
-        // add 1 to player 1's score
+        
     // else
-        // add 1 to player 2's score
+    else{
+        player2Score++;
+        document.getElementById("P2-score").innerHTML = player2Score;
+    }
 };
 
 
@@ -48,15 +27,128 @@ let clearGameBoard = () => {
     // while (#gameboard.firstChild){
     //  #gameboard.removeChild(#gameboard.firstChild)
     // }
+    
+    document.getElementById("gameboard").innerHTML= "";
+    gameboard = ["","","","","","","","",""];
 }
 
 let gameWin = () => {
     //if (there are 3 in a row horizontally, vertically or diagonally)
-        // identify the token that did it
-        // search for the player with that token
-        // if (player 1)
-            // have a pop up on screen stating player 1 wins
-            //else 
-            // popup with player 2 wins 
-        //execute the clearGameBoard() function
-}
+    let topRow = [gameboard[0],gameboard[1],gameboard[2]];
+    let middleRow = [gameboard[3],gameboard[4],gameboard[5]];
+    let bottomRow = [gameboard[6],gameboard[7],gameboard[8]];
+    let leftColumn = [gameboard[0],gameboard[3],gameboard[6]];
+    let middleColumn = [gameboard[1],gameboard[4],gameboard[7]];
+    let rightColumn = [gameboard[2],gameboard[5],gameboard[8]];
+    let Diagonal1 = [gameboard[0],gameboard[4],gameboard[8]];
+    let Diagonal2 = [gameboard[2],gameboard[4],gameboard[6]];
+
+    let winningArray = [topRow,middleRow,bottomRow,leftColumn,middleColumn,rightColumn,Diagonal1,Diagonal2]
+
+    for(let i = 0; i<winningArray.length; i++){
+        let possibleWin = [];
+        for(let j = 0; j<winningArray[i].length; j++){
+            possibleWin.push(winningArray[i][j]);
+            
+        }
+
+        function xTest(value){
+            return value=="X";
+        }
+
+        function oTest(value){
+            return value=="O";
+        }
+        console.log(`possible win ${i}`, possibleWin);
+        console.log("possible win using every function", possibleWin.every(xTest))
+
+        if(possibleWin.every(xTest)){
+            alert("player 1 wins!")
+            updateScore("1");
+            
+            clearGameBoard();
+            //alert the user that there will be a new game 
+            playerTurnSwitcher()
+            createGameboard();
+            return;
+        }
+
+        if(possibleWin.every(oTest)){
+            alert("player 2 wins!")
+            updateScore("2");
+            clearGameBoard();
+            //alert the user that there will be a new game 
+            createGameboard();
+            return;
+        }
+    }
+    return;
+};
+
+let playerTurnSwitcher = () => {
+    //if it was player 1's turn
+    // make inner HTML = Player 2's turn
+    // update variable whoseTurnIsIt="2"
+    if(whoseTurnIsIt == "1"){
+        document.getElementById("turn-display").innerHTML = "Player 2's Turn"
+        whoseTurnIsIt = "2"
+    }
+    
+    //else 
+        // make inner HTML = Player 1's turn
+        // update variable whoseTurnIsIt="1"
+    else{
+        document.getElementById("turn-display").innerHTML = "Player 1's Turn"
+        whoseTurnIsIt = "1"
+    }
+    
+};
+
+let addIconToGameboard = (clickedElement) => {
+    // if player 1's turn and player 1 clicks gameboard box 
+        
+    if(whoseTurnIsIt == "1"){
+            // array gameboard[clickedElement.target.id] = X.
+        if(gameboard[Number(clickedElement.target.id)] == ""){
+            gameboard[Number(clickedElement.target.id)] = "X";
+            // add X to innerHTML of clicked element
+            clickedElement.target.innerHTML = gameboard[Number(clickedElement.target.id)]
+                // execute the playerTurnSwitcher() function
+            gameWin();
+            playerTurnSwitcher();
+        }
+    }
+        
+    // else 
+    else if (gameboard[Number(clickedElement.target.id)] == ""){
+            // array gameboard[clickedElement.target.id] = O.
+        gameboard[Number(clickedElement.target.id)] = "O";
+            // add O to innerHTML of clicked element
+        clickedElement.target.innerHTML = gameboard[Number(clickedElement.target.id)]
+            // execute the playerTurnSwitcher function
+        gameWin();
+        playerTurnSwitcher();
+    }
+        
+};
+
+let createGameboard = () => {
+    //create gameboard boxes from array
+    for(let i = 0; i<gameboard.length; i++){
+        let newBox = document.createElement("div");
+        newBox.setAttribute("class", "gamebox")
+        newBox.setAttribute("id", `${i}`)
+        newBox.innerHTML = gameboard[i];
+
+
+        newBox.addEventListener("click", function listener(event){
+            //execute addIconToGameBoard(event) Function with event data as a parameter
+            addIconToGameboard(event);
+            //remove eventListener
+            //newBox.removeEventListener("click", listener)
+        })
+        document.getElementById("gameboard").appendChild(newBox);
+    }
+};
+
+createGameboard();

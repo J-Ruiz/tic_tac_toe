@@ -1,5 +1,23 @@
+#container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .gamebox{
-    width: 50px;
-    height: 50px;
-    color: rgb(219, 190, 190);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5vw;
+    min-height: 20vh;
+    background-color: rgb(219, 190, 190);
+    color: black;
+}
+
+#gameboard{
+    display: grid;
+    width: 30%;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    grid-row-gap: 20px;
+    grid-column-gap: 20px;
 }
