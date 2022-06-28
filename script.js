@@ -7,6 +7,7 @@ let player1Score = 0;
 
 let player2Score = 0;
 
+let numberOfClicks = 0;
 
 let updateScore = (winningPlayer) => {
         // if winning player is player1
@@ -59,28 +60,36 @@ let gameWin = () => {
         function oTest(value){
             return value=="O";
         }
-        console.log(`possible win ${i}`, possibleWin);
-        console.log("possible win using every function", possibleWin.every(xTest))
+
+        console.log("array with every value" , possibleWin,possibleWin.every(xTest));
 
         if(possibleWin.every(xTest)){
             alert("player 1 wins!")
             updateScore("1");
-            
             clearGameBoard();
-            //alert the user that there will be a new game 
             playerTurnSwitcher()
+            numberOfClicks=0;
             createGameboard();
             return;
         }
 
-        if(possibleWin.every(oTest)){
+        else if(possibleWin.every(oTest)){
             alert("player 2 wins!")
             updateScore("2");
             clearGameBoard();
-            //alert the user that there will be a new game 
+            numberOfClicks=0;
             createGameboard();
             return;
         }
+ 
+    }
+    if(numberOfClicks == 9){
+        alert("Tie Game! Try Again")
+        playerTurnSwitcher();
+        clearGameBoard();
+        numberOfClicks=0;
+        createGameboard();
+        return;
     }
     return;
 };
@@ -114,6 +123,7 @@ let addIconToGameboard = (clickedElement) => {
             // add X to innerHTML of clicked element
             clickedElement.target.innerHTML = gameboard[Number(clickedElement.target.id)]
                 // execute the playerTurnSwitcher() function
+            numberOfClicks++;
             gameWin();
             playerTurnSwitcher();
         }
@@ -126,6 +136,7 @@ let addIconToGameboard = (clickedElement) => {
             // add O to innerHTML of clicked element
         clickedElement.target.innerHTML = gameboard[Number(clickedElement.target.id)]
             // execute the playerTurnSwitcher function
+        numberOfClicks++;
         gameWin();
         playerTurnSwitcher();
     }
