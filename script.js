@@ -6,6 +6,7 @@ startGameButton.addEventListener("click", ()=>{
     document.getElementById("P2-name-display").innerHTML = document.getElementById("player-2-name").value
     document.getElementById("enter-your-name").style.visibility = "hidden";
     document.getElementById("reset-button").style.visibility = "visible";
+    document.getElementById("turn-marker").innerHTML = document.getElementById("player-1-name").value + "'s Turn!";
     ticTacToe();
 });
 
@@ -134,7 +135,7 @@ const ticTacToe = () => {
         // make inner HTML = Player 2's turn
         // update variable whoseTurnIsIt="2"
         if(whoseTurnIsIt == "1"){
-            document.getElementById("turn-marker").innerHTML = "Player 2's Turn"
+            document.getElementById("turn-marker").innerHTML = document.getElementById("P2-name-display").innerHTML + "'s Turn!"
             whoseTurnIsIt = "2"
         }
         
@@ -142,7 +143,7 @@ const ticTacToe = () => {
             // make inner HTML = Player 1's turn
             // update variable whoseTurnIsIt="1"
         else{
-            document.getElementById("turn-marker").innerHTML = "Player 1's Turn"
+            document.getElementById("turn-marker").innerHTML = document.getElementById("P1-name-display").innerHTML + "'s Turn!"
             whoseTurnIsIt = "1"
         }
         
