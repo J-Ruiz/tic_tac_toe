@@ -9,22 +9,32 @@
 <link rel="stylesheet" href="style.css">
 <body>
     <div id="container">
-        <div id="player-choose-token">
-      
+
+        <div id="enter-your-name">
+            <label for="player-1-name">Player One Name</label>
+            <input type="text" id="player-1-name" name="player-1-name">
+
+            <label for="player-2-name">Player One Name</label>
+            <input type="text" id="player-2-name" name="player-2-name">
+
+            <button type="button" id="start-game-button">Start the Game!</button>
 
         </div>
         
             <div id="game-title">Tic Tac Toe</div>
+            
             <div id ="turn-marker">Player 1's Turn</div>
 
             <div id="score-marker">
                 <div class="player-score-display">
-                    <p>Player 1 Score</p>
+                    <p id="P1-name-display">Player 1 Score</p>
                     <p id="P1-score">0</p>
                 </div>
+
+                <button type="submit" id="reset-button">Reset the Game</button>
                 
                 <div class="player-score-display">
-                    <p>Player 2 Score</p>
+                    <p id="P2-name-display">Player 2 Score</p>
                     <p id="P2-score">0</p>
                 </div>
                 

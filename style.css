@@ -4,6 +4,44 @@
     align-items: center;
     background-color: rgb(143, 116, 75);
     padding: 3vh;
+    height: 100vh;
+}
+
+#enter-your-name{
+    position: fixed;
+    width: 40vw;
+    left:0;
+    right:0;
+    top:13%;
+    margin-right:auto;
+    margin-left:auto;
+    min-height: 70vh;
+
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
+    text-align: center;
+
+    border: black solid 3px;
+    padding: 5%;
+    background-color: lightgreen;
+
+    visibility: visible;
+}
+
+#start-game-button{
+    margin-top: 3vh;
+    padding: 3vh;
+    font-size: 3vh;
+}
+
+#reset-button{
+    visibility: hidden;
+    height: 12vh;
+    min-height: 6vh;
+    width: 10vw;
+    margin: 3vh;
+    font-weight: bold;
 }
 .gamebox{
     display: flex;
@@ -28,7 +66,7 @@
 #score-marker{
     display: flex;
     text-align: center;
-    gap: 10vw;
+    gap: 5vw;
     font-size: 3vh;
 }
 
@@ -49,4 +87,5 @@
     border: solid black 5px;
     padding: .5vh;
     margin: 2vh;
+    min-width: 10vw;
 }
