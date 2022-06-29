@@ -2,15 +2,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: rgb(143, 116, 75);
+    padding: 3vh;
 }
 .gamebox{
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 5vw;
-    min-height: 20vh;
-    background-color: rgb(219, 190, 190);
+    min-height: 15vh;
+    background-color: rgb(115, 223, 124);
     color: black;
+    border: solid black 5px;
 }
 
 #gameboard{
@@ -20,4 +23,30 @@
     grid-template-columns: repeat(3, 1fr);
     grid-row-gap: 20px;
     grid-column-gap: 20px;
+}
+
+#score-marker{
+    display: flex;
+    text-align: center;
+    gap: 10vw;
+    font-size: 3vh;
+}
+
+#turn-marker{
+    text-align: center;
+    font-size: 5vh;
+    color: honeydew;
+}
+
+#game-title{
+    text-align: center;
+    font-size: 7vh;
+    color: rgb(222, 235, 151);
+}
+
+.player-score-display{
+    background-color: rgb(222, 235, 151);
+    border: solid black 5px;
+    padding: .5vh;
+    margin: 2vh;
 }
